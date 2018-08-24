@@ -128,7 +128,7 @@ module Indexable
   #   %w{W o r l d}.from(3)  #=> %w{l d}
   #
   def from(i)
-    return self if i >= size
+    return [] if i >= size
     slice(i, size - i) #slice(-n..-1)
   end
 
@@ -199,18 +199,20 @@ module Indexable
     splice(-1)
   end
 
-  # A shorting of "ends at", returns the
-  # last index of the indexable object.
-  # Returns nil if there are no elements.
+  # A shortening of "ends at". Returns the
+  # last index of the indexable object,
+  # or nil if there are no elements.
   #
   #   [1,2,3,4,5].ends  #=> 4
   #
-  # This nearly equivalent to +size - 1+.
+  # This is nearly equivalent to +size - 1+.
   #
   def ends
     return nil if size == 0
     size - 1
   end
+
+  alias_method :last_index, :ends
 
   # Returns the positive ordinal index given
   # a cardinal position, 1 to n or -n to -1.
